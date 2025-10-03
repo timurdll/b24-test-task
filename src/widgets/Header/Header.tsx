@@ -2,20 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useUserStore } from "@/src/entities/user";
-import { logout } from "@/src/shared/api";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
-  const clearUser = useUserStore((state) => state.clearUser);
-
-  const handleLogout = async () => {
-    await logout();
-    clearUser();
-    router.push("/auth/login");
-  };
 
   const navItems = [
     { href: "/dashboard", label: "Дашборд", icon: "/icons/dashboard.svg" },

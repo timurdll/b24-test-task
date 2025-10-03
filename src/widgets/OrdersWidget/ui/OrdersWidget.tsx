@@ -19,7 +19,7 @@ const mockOrders: OrderCard[] = [
   },
   {
     id: 2,
-    title: "Гарантия на детали для переднего бампера",
+    title: "Гарантия на детали для бампера",
     image: "/images/doc2.png",
   },
   {
@@ -103,10 +103,6 @@ const chunk = <T,>(arr: T[], size: number): T[][] => {
 };
 
 const OrdersWidget: React.FC = () => {
-  const handleDownload = (orderId: number) => {
-    console.log("Downloading order:", orderId);
-  };
-
   const [swiperSettings, setSwiperSettings] = React.useState({
     slidesPerView: 1,
     spaceBetween: 0,

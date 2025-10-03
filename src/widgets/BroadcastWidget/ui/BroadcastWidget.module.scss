@@ -57,14 +57,7 @@
 .liveIcon {
   width: 16px;
   height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.liveIcon::before {
-  content: "▶";
-  font-size: 12px;
+  display: block;
 }
 
 .videoContainer {

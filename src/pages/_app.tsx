@@ -19,7 +19,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
-    // Проверяем аутентификацию при загрузке приложения
     const checkAuth = async () => {
       try {
         const result = await getCurrentUser();

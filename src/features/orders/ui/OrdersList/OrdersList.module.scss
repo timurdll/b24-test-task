@@ -1,0 +1,36 @@
+.ordersGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .ordersGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ordersGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ordersGrid {
+    grid-template-columns: 1fr;
+  }
+}

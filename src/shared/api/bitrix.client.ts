@@ -2,68 +2,31 @@
  * Bitrix24 API клиент
  */
 import axios from "axios";
+import type {
+  BitrixContactData,
+  BitrixContactResponse,
+  BitrixContactUpdateData,
+  BitrixContactUpdateResponse,
+  BitrixDealData,
+  BitrixDealResponse,
+  BitrixDeal,
+  BitrixDealsListResponse,
+} from "@/src/shared/types/bitrix.types";
 
 const BITRIX_WEBHOOK =
   "https://b24-3j0xu3.bitrix24.kz/rest/1/8spymo6egpzv2wzs/";
 
-// =============== TYPES ===============
-
-export interface BitrixContactData {
-  NAME: string;
-  EMAIL: Array<{ VALUE: string; VALUE_TYPE: string }>;
-}
-
-export interface BitrixContactResponse {
-  result?: number;
-  error?: string;
-  error_description?: string;
-}
-
-export interface BitrixContactUpdateData {
-  NAME: string;
-  EMAIL?: Array<{ VALUE: string; VALUE_TYPE: string }>;
-  PHONE?: Array<{ VALUE: string; VALUE_TYPE: string }>;
-  ADDRESS?: string;
-}
-
-export interface BitrixContactUpdateResponse {
-  result?: boolean;
-  error?: string;
-  error_description?: string;
-}
-
-export interface BitrixDealData {
-  TITLE: string;
-  CONTACT_ID: string;
-  STAGE_ID?: string;
-  OPENED?: "Y" | "N";
-  CURRENCY_ID?: string;
-  OPPORTUNITY?: number;
-  COMMENTS?: string;
-}
-
-export interface BitrixDealResponse {
-  result?: number;
-  error?: string;
-  error_description?: string;
-}
-
-export interface BitrixDeal {
-  ID: string;
-  TITLE: string;
-  DATE_CREATE: string;
-  STAGE_ID: string;
-  CONTACT_ID: string;
-  OPPORTUNITY: string;
-  CURRENCY_ID: string;
-  COMMENTS: string;
-}
-
-export interface BitrixDealsListResponse {
-  result?: BitrixDeal[];
-  error?: string;
-  error_description?: string;
-}
+// Re-export types for convenience
+export type {
+  BitrixContactData,
+  BitrixContactResponse,
+  BitrixContactUpdateData,
+  BitrixContactUpdateResponse,
+  BitrixDealData,
+  BitrixDealResponse,
+  BitrixDeal,
+  BitrixDealsListResponse,
+} from "@/src/shared/types/bitrix.types";
 
 // =============== CONTACTS API ===============
 

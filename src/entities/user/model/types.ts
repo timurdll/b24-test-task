@@ -43,3 +43,5 @@ export interface UpdateProfileData {
   phone?: string;
   address?: string;
 }
+
+export type SafeUserResponse = Omit<User, "password">;

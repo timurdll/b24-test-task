@@ -185,7 +185,7 @@ const PaymentsTable: React.FC = () => {
         </Typography>
       </Box>
 
-      <StyledTableContainer component={Paper}>
+      <StyledTableContainer>
         <Table>
           <StyledTableHead>
             <TableRow>

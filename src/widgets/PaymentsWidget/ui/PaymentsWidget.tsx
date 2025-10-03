@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useMemo } from "react";
+import { Avatar } from "@/src/shared/ui";
 import styles from "./PaymentsWidget.module.scss";
 
 interface Payment {
@@ -18,9 +18,9 @@ const mockPayments: Payment[] = [
   {
     id: 1,
     employee: {
-      name: "Имя",
-      email: "Почта@jourrapide.com",
-      avatar: "И",
+      name: "Иван Петров",
+      email: "ivan@example.com",
+      avatar: "ИП",
     },
     status: "unpaid",
     completed: 96,
@@ -29,53 +29,125 @@ const mockPayments: Payment[] = [
   {
     id: 2,
     employee: {
-      name: "Gregory Davis A",
-      email: "gregorydavis@dayrep.com",
-      avatar: "GD",
+      name: "Анна Сидорова",
+      email: "anna@example.com",
+      avatar: "АС",
     },
     status: "paid",
-    completed: 73,
+    completed: 100,
     action: "Смотреть",
   },
   {
     id: 3,
     employee: {
-      name: "Gregory Davis A",
-      email: "gregorydavis@dayrep.com",
-      avatar: "GD",
+      name: "Михаил Козлов",
+      email: "mikhail@example.com",
+      avatar: "МК",
+    },
+    status: "unpaid",
+    completed: 45,
+    action: "Смотреть",
+  },
+  {
+    id: 4,
+    employee: {
+      name: "Елена Волкова",
+      email: "elena@example.com",
+      avatar: "ЕВ",
     },
     status: "paid",
-    completed: 73,
+    completed: 100,
+    action: "Смотреть",
+  },
+  {
+    id: 5,
+    employee: {
+      name: "Дмитрий Новиков",
+      email: "dmitry@example.com",
+      avatar: "ДН",
+    },
+    status: "unpaid",
+    completed: 78,
+    action: "Смотреть",
+  },
+  {
+    id: 6,
+    employee: {
+      name: "Ольга Морозова",
+      email: "olga@example.com",
+      avatar: "ОМ",
+    },
+    status: "paid",
+    completed: 100,
     action: "Смотреть",
   },
 ];
 
-const filterOptions = [
-  { value: "all", label: "Все платежи за последнюю неделю" },
-  { value: "today", label: "Сегодня" },
-  { value: "week", label: "За неделю" },
-  { value: "month", label: "За месяц" },
-  { value: "year", label: "За год" },
+type FilterType = "all" | "status" | "completion";
+type StatusFilter = "all" | "paid" | "unpaid";
+type CompletionFilter = "all" | "completed" | "incomplete";
+
+interface FilterOption {
+  value: string;
+  label: string;
+  type: FilterType;
+  status?: StatusFilter;
+  completion?: CompletionFilter;
+}
+
+const filterOptions: FilterOption[] = [
+  { value: "all", label: "Все платежи", type: "all" },
+  { value: "paid", label: "Оплаченные", type: "status", status: "paid" },
+  { value: "unpaid", label: "Неоплаченные", type: "status", status: "unpaid" },
+  {
+    value: "completed",
+    label: "Выполненные (100%)",
+    type: "completion",
+    completion: "completed",
+  },
+  {
+    value: "incomplete",
+    label: "Невыполненные",
+    type: "completion",
+    completion: "incomplete",
+  },
 ];
 
 const PaymentsWidget: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(
-    "Все платежи за последнюю неделю"
+  const [selectedFilter, setSelectedFilter] = useState<FilterOption>(
+    filterOptions[0]
   );
 
-  const filters = [
-    "Все платежи за последнюю неделю",
-    "Все платежи за последний месяц",
-    "Все платежи за последний год",
-    "Все платежи",
-  ];
-
-  const handleFilterSelect = (filter: string) => {
+  const handleFilterSelect = (filter: FilterOption) => {
     setSelectedFilter(filter);
     setDropdownOpen(false);
-    console.log("Selected filter:", filter);
   };
+
+  // Мемоизированная фильтрация платежей
+  const filteredPayments = useMemo(() => {
+    return mockPayments.filter((payment) => {
+      // Фильтр по статусу
+      if (selectedFilter.type === "status" && selectedFilter.status) {
+        if (selectedFilter.status === "all") return true;
+        return payment.status === selectedFilter.status;
+      }
+
+      // Фильтр по выполнению
+      if (selectedFilter.type === "completion" && selectedFilter.completion) {
+        if (selectedFilter.completion === "all") return true;
+        if (selectedFilter.completion === "completed") {
+          return payment.completed === 100;
+        }
+        if (selectedFilter.completion === "incomplete") {
+          return payment.completed < 100;
+        }
+      }
+
+      // Показать все платежи
+      return true;
+    });
+  }, [selectedFilter]);
 
   return (
     <div className={styles.paymentsBlock}>
@@ -89,21 +161,21 @@ const PaymentsWidget: React.FC = () => {
             className={styles.dropdownButton}
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <span>{selectedFilter}</span>
+            <span>{selectedFilter.label}</span>
             <span className="icon-chevron-down">▼</span>
           </button>
 
           {dropdownOpen && (
             <div className={styles.dropdownMenu}>
-              {filters.map((filter) => (
+              {filterOptions.map((filter) => (
                 <div
-                  key={filter}
+                  key={filter.value}
                   className={`${styles.dropdownItem} ${
-                    selectedFilter === filter ? styles.active : ""
+                    selectedFilter.value === filter.value ? styles.active : ""
                   }`}
                   onClick={() => handleFilterSelect(filter)}
                 >
-                  {filter}
+                  {filter.label}
                 </div>
               ))}
             </div>
@@ -121,18 +193,10 @@ const PaymentsWidget: React.FC = () => {
       </div>
 
       <div className={styles.tableBody}>
-        {mockPayments.map((payment) => (
+        {filteredPayments.map((payment) => (
           <div key={payment.id} className={styles.tableRow}>
             <div className={styles.employeeInfo}>
-              <div className={styles.avatar}>
-                <Image
-                  src="/icons/avatar.svg"
-                  alt="Avatar"
-                  width={20}
-                  height={24}
-                  className={styles.avatarIcon}
-                />
-              </div>
+              <Avatar size="small" />
               <div className={styles.employeeText}>
                 <div className={styles.employeeName}>
                   {payment.employee.name}

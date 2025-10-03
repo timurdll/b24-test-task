@@ -44,14 +44,6 @@ export async function login(data: LoginData): Promise<AuthResponse> {
 }
 
 /**
- * Выход из системы
- */
-export async function logout(): Promise<{ ok: boolean }> {
-  const response = await apiClient.post("/auth/logout");
-  return { ok: response.ok };
-}
-
-/**
  * Получение текущего пользователя
  */
 export async function getCurrentUser(): Promise<AuthResponse> {

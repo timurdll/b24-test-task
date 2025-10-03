@@ -2,14 +2,15 @@
 .inputWrap {
   display: block;
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 .labelText {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .inputRow {
@@ -30,6 +31,8 @@
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  margin: 0;
+  height: 48px;
 }
 
 /* состояние ошибки — красная рамка */

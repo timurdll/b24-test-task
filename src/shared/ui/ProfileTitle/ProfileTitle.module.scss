@@ -1,0 +1,45 @@
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.title.large {
+  margin-bottom: 32px;
+  font-size: 24px;
+}
+
+.titleBar {
+  width: 4px;
+  height: 24px;
+  background: var(--primary-blue);
+  border-radius: 2px;
+}
+
+.title.large .titleBar {
+  height: 32px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .title.large {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title.large {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}

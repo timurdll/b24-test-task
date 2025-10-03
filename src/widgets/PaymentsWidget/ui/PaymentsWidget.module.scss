@@ -145,31 +145,36 @@
   border-bottom: none;
 }
 
+.tableBody {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+  padding-right: 4px;
+}
+
+/* Кастомный скроллбар для webkit браузеров */
+.tableBody::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tableBody::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.tableBody::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.tableBody::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
 .employeeInfo {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  background: linear-gradient(white, white) padding-box,
-    linear-gradient(90deg, #0147ff 0%, #2b3b63 100%) border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.avatarIcon {
-  width: 20px;
-  height: 24px;
-  opacity: 0.6;
 }
 
 .employeeText {
@@ -257,6 +262,11 @@
     margin-bottom: 12px;
   }
 
+  .tableBody {
+    max-height: none;
+    overflow-y: visible;
+  }
+
   .title {
     font-size: 14px;
     margin-bottom: 12px;
@@ -299,13 +309,6 @@
 
   .employeeInfo {
     gap: 6px;
-  }
-
-  .avatar {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
-    border: 2px solid transparent;
   }
 
   .employeeName {
@@ -385,13 +388,6 @@
 
   .employeeInfo {
     gap: 8px;
-  }
-
-  .avatar {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    border: 1px solid transparent;
   }
 
   .employeeName {
@@ -481,12 +477,6 @@
 
   .employeeInfo {
     gap: 6px;
-  }
-
-  .avatar {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
   }
 
   .employeeName {

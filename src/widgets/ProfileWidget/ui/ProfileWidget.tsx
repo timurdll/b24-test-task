@@ -1,65 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { getCurrentUser } from "@/src/shared/api";
-import Image from "next/image";
+import React from "react";
+import { Avatar, ProfileTitle, DisplayField } from "@/src/shared/ui";
+import { useProfileData } from "@/src/shared/lib/profile";
 import styles from "./ProfileWidget.module.scss";
 
-interface UserData {
-  id: number;
-  login: string;
-  email: string;
-  bitrixId: string | null;
-  phone?: string | null;
-  address?: string | null;
-  createdAt: string;
-  updatedAt?: string | null;
-}
-
 const ProfileWidget: React.FC = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const result = await getCurrentUser();
-        if (result.ok && result.user) {
-          setUserData(result.user);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  const getAvatarIcon = () => {
-    return (
-      <Image
-        src="/icons/avatar.svg"
-        alt="Avatar"
-        width={40}
-        height={48}
-        className={styles.avatarIcon}
-      />
-    );
-  };
-
-  // Получаем данные из userData или используем значения по умолчанию
-  const displayName = userData?.login || "Не указано";
-  const displayEmail = userData?.email || "Не указано";
-  const displayPhone = userData?.phone || "Не указано";
-  const displayAddress = userData?.address || "";
+  const { userData, loading } = useProfileData();
 
   if (loading) {
     return (
       <div className={styles.profileBlock}>
-        <div className={styles.title}>
-          <div className={styles.titleBar}></div>
-          Профиль
-        </div>
+        <ProfileTitle />
         <div className={styles.loading}>Загрузка...</div>
       </div>
     );
@@ -67,40 +17,39 @@ const ProfileWidget: React.FC = () => {
 
   return (
     <div className={styles.profileBlock}>
-      <div className={styles.title}>
-        <div className={styles.titleBar}></div>
-        Профиль
-      </div>
+      <ProfileTitle />
 
       <div className={styles.profileContent}>
-        <div className={styles.avatar}>{getAvatarIcon()}</div>
+        <Avatar size="medium" />
 
         <div className={styles.fields}>
-          <div className={styles.field}>
-            <label className={styles.fieldLabel}>Имя</label>
-            <div className={styles.fieldValue}>{displayName}</div>
-          </div>
+          <DisplayField
+            label="Имя"
+            value={userData?.login || ""}
+            placeholder="Не указано"
+            size="small"
+          />
 
-          <div className={styles.field}>
-            <label className={styles.fieldLabel}>Email</label>
-            <div className={styles.fieldValue}>{displayEmail}</div>
-          </div>
+          <DisplayField
+            label="Email"
+            value={userData?.email || ""}
+            placeholder="Не указано"
+            size="small"
+          />
 
-          <div className={styles.field}>
-            <label className={styles.fieldLabel}>Телефон</label>
-            <div className={styles.fieldValue}>{displayPhone}</div>
-          </div>
+          <DisplayField
+            label="Телефон"
+            value={userData?.phone || ""}
+            placeholder="Не указано"
+            size="small"
+          />
 
-          <div className={styles.field}>
-            <label className={styles.fieldLabel}>Адрес</label>
-            <div
-              className={`${styles.fieldValue} ${
-                !displayAddress ? styles.empty : ""
-              }`}
-            >
-              {displayAddress || "Адрес"}
-            </div>
-          </div>
+          <DisplayField
+            label="Адрес"
+            value={userData?.address || ""}
+            placeholder="Адрес"
+            size="small"
+          />
         </div>
       </div>
     </div>

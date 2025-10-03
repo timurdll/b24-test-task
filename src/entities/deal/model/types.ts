@@ -1,6 +1,7 @@
 /**
  * Типы для сущности Deal
  */
+import type { BitrixDeal } from "@/src/shared/types/bitrix.types";
 
 export interface Deal {
   id: string;
@@ -30,3 +31,11 @@ export interface CreateDealResponse {
   dealId?: number;
   message?: string;
 }
+
+export interface CreateDealDto {
+  title: string;
+  comments?: string;
+}
+
+// Re-export BitrixDeal for convenience
+export type { BitrixDeal };

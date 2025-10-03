@@ -1,4 +1,4 @@
 /**
  * Barrel export для сущности Order
  */
-export * from "./model/types";
+export * from "./ui/OrderCard";

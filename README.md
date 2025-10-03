@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# B24 Test Task
 
-## Getting Started
+Приложение для управления заказами и платежами с интеграцией Битрикс24.
 
-First, run the development server:
+## 🚀 Быстрый старт
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Предварительные требования
+
+- Node.js 18+
+- npm или yarn
+
+### Установка
+
+1. **Клонируйте репозиторий**
+
+   ```bash
+   git clone <repository-url>
+   cd b24-test-task
+   ```
+
+2. **Установите зависимости**
+
+   ```bash
+   npm install
+   ```
+
+3. **Настройте переменные окружения**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Отредактируйте `.env.local` и установите безопасный JWT_SECRET:
+
+   ```env
+   JWT_SECRET=your-super-secure-jwt-secret-key
+   NODE_ENV=development
+   ```
+
+4. **Инициализируйте базу данных**
+
+   ```bash
+   npm run db:init
+   ```
+
+5. **Запустите приложение**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Откройте браузер**
+   ```
+   http://localhost:3000
+   ```
+
+## 📋 Доступные команды
+
+- `npm run dev` - запуск в режиме разработки
+- `npm run build` - сборка для продакшена
+- `npm run start` - запуск продакшен сборки
+- `npm run db:init` - инициализация базы данных
+
+## 🏗️ Архитектура
+
+Проект использует Feature-Sliced Design (FSD) архитектуру:
+
+```
+src/
+├── app/           # Конфигурация приложения
+├── pages/         # Next.js страницы
+├── widgets/       # Составные UI блоки
+├── features/      # Бизнес-функции
+├── entities/      # Бизнес-сущности
+└── shared/        # Переиспользуемые ресурсы
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Технологии
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: SCSS Modules
+- **State**: Zustand
+- **Database**: SQLite (better-sqlite3)
+- **Auth**: JWT + bcrypt
+- **UI**: Material-UI, Swiper.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📱 Функциональность
 
-## Learn More
+- ✅ Аутентификация (вход/регистрация)
+- ✅ Управление профилем пользователя
+- ✅ Просмотр заказов с фильтрацией
+- ✅ Управление платежами
+- ✅ Интеграция с Битрикс24
+- ✅ Адаптивный дизайн
 
-To learn more about Next.js, take a look at the following resources:
+## 🔐 Безопасность
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- JWT токены для аутентификации
+- Хеширование паролей с bcrypt
+- Валидация данных на клиенте и сервере
+- Защищенные API роуты
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 Лицензия
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License

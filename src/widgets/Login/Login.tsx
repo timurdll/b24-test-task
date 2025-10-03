@@ -1,24 +1,22 @@
 import React, { JSX, useState } from "react";
-import { useRouter } from "next/router";
-import Input from "@/src/shared/ui/Input/Input";
+import { EmailInput, PasswordInput } from "@/src/shared/ui";
+import {
+  validateEmail,
+  validatePassword,
+} from "@/src/shared/lib/validation/fieldValidators";
 import styles from "./Login.module.scss";
-// По соглашению — в processes лежат бизнес-логика / api
-
-const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
 
 export default function Login(): JSX.Element {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const emailValid = EMAIL_REGEX.test(email);
-  const passwordValid = PASSWORD_REGEX.test(password);
-  const formValid = emailValid && passwordValid;
+  // Валидация формы
+  const emailError = validateEmail(email);
+  const passwordError = validatePassword(password);
+  const formValid = !emailError && !passwordError;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,15 +30,6 @@ export default function Login(): JSX.Element {
       setTimeout(() => {
         setLoading(false);
       }, 2);
-      // Пример вызова бизнес-логики (реализуй auth.service.login)
-      // Предполагается что authService.login возвращает { ok: boolean, error?: string }
-      //   const res = await authService.login({ email, password, remember });
-      //   if (res?.ok) {
-      //     // перенаправление после успешного логина
-      //     router.push("/");
-      //   } else {
-      //     setSubmitError(res?.error ?? "Ошибка входа. Попробуйте ещё раз.");
-      //   }
     } catch (err) {
       console.error(err);
       setSubmitError("Серверная ошибка. Попробуйте позже.");
@@ -59,31 +48,18 @@ export default function Login(): JSX.Element {
               <h2 className={styles.title}>Вход</h2>
 
               <form onSubmit={handleSubmit} className={styles.form} noValidate>
-                <Input
+                <EmailInput
                   label="Email"
                   placeholder="Email"
-                  type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  error={
-                    !emailValid && email.length > 0 ? "Неверный email" : null
-                  }
-                  showErrorOnBlur
+                  onChange={setEmail}
                 />
 
-                <Input
+                <PasswordInput
                   label="Пароль"
                   placeholder="Пароль"
-                  type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  error={
-                    !passwordValid && password.length > 0
-                      ? "Минимум 6 символов, 1 заглавная буква, 1 цифра"
-                      : null
-                  }
-                  showEye
-                  showErrorOnBlur
+                  onChange={setPassword}
                 />
 
                 <div className={styles.row}>

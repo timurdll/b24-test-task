@@ -1,31 +1,38 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Input from "@/src/shared/ui/Input/Input";
+import { NameInput, EmailInput, PasswordInput } from "@/src/shared/ui";
 import { register } from "@/src/shared/api";
 import { useUserStore } from "@/src/entities/user";
+import { validatePasswordConfirm } from "@/src/shared/lib/validation/fieldValidators";
 import styles from "./RegisterForm.module.scss";
-
-const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
-const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export default function RegisterForm() {
   const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
 
-  const [login, setLogin] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const loginValid = login.trim().length > 0;
-  const emailValid = EMAIL_REGEX.test(email);
-  const passwordValid = PASSWORD_REGEX.test(password);
-  const confirmValid = password === confirm && confirm.length > 0;
+  // Валидация формы
+  const nameError =
+    name.trim().length === 0 ? { field: "name", message: "Введите имя" } : null;
+  const emailError =
+    email.trim().length === 0
+      ? { field: "email", message: "Введите email" }
+      : null;
+  const passwordError =
+    password.length === 0
+      ? { field: "password", message: "Введите пароль" }
+      : null;
+  const confirmError = validatePasswordConfirm(password, confirm);
 
-  const formValid = loginValid && emailValid && passwordValid && confirmValid;
+  const formValid =
+    !nameError && !emailError && !passwordError && !confirmError;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,7 +42,7 @@ export default function RegisterForm() {
 
     try {
       setLoading(true);
-      const result = await register({ login, email, password });
+      const result = await register({ name, email, password });
 
       if (result.ok && result.user) {
         setUser(result.user);
@@ -53,51 +60,33 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} noValidate>
-      <Input
-        label="Логин"
-        placeholder="Логин"
-        value={login}
-        onChange={(e) => setLogin(e.target.value)}
-        error={!loginValid && login.length > 0 ? "Введите логин" : null}
-        showErrorOnBlur
+      <NameInput
+        label="Имя"
+        placeholder="Имя"
+        value={name}
+        onChange={setName}
+        variant="registration"
       />
 
-      <Input
+      <EmailInput
         label="Mail"
         placeholder="Email"
-        type="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        error={!emailValid && email.length > 0 ? "Неверный email" : null}
-        showErrorOnBlur
+        onChange={setEmail}
       />
 
-      <Input
+      <PasswordInput
         label="Пароль"
         placeholder="Пароль"
-        type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        error={
-          !passwordValid && password.length > 0
-            ? "Минимум 6 символов, 1 заглавная буква, 1 цифра"
-            : null
-        }
-        showEye
-        showErrorOnBlur
+        onChange={setPassword}
       />
 
-      <Input
+      <PasswordInput
         label="Повторите пароль"
         placeholder="Повторите пароль"
-        type="password"
         value={confirm}
-        onChange={(e) => setConfirm(e.target.value)}
-        error={
-          !confirmValid && confirm.length > 0 ? "Пароли не совпадают" : null
-        }
-        showEye
-        showErrorOnBlur
+        onChange={setConfirm}
       />
 
       {submitError && <div className={styles.submitError}>{submitError}</div>}

@@ -1,0 +1,140 @@
+.profileContainer {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.large {
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1;
+}
+
+.profileContent.large {
+  gap: 40px;
+}
+
+.fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.fields.large {
+  gap: 24px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.loading.large {
+  padding: 40px;
+  font-size: 16px;
+}
+
+.editBtn {
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.editBtn:hover {
+  background: #0037cc;
+  transform: translateY(-1px);
+}
+
+.saveError {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #c33;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .profileContainer {
+    height: auto;
+    min-height: fit-content;
+  }
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 16px;
+    margin-bottom: 16px;
+    height: auto;
+    min-height: fit-content;
+  }
+
+  .profileContainer.large {
+    padding: 20px;
+  }
+
+  .profileContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .profileContent.large {
+    gap: 24px;
+  }
+
+  .fields {
+    gap: 12px;
+    width: 100%;
+  }
+
+  .fields.large {
+    gap: 20px;
+  }
+
+  .editBtn {
+    padding: 10px 24px;
+    font-size: 14px;
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContainer.large {
+    padding: 16px;
+  }
+
+  .fields.large {
+    gap: 16px;
+  }
+}

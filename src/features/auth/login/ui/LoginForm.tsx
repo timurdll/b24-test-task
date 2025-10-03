@@ -15,7 +15,6 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -31,7 +30,7 @@ export default function LoginForm() {
 
     try {
       setLoading(true);
-      const result = await login({ email, password, remember });
+      const result = await login({ email, password });
 
       if (result.ok && result.user) {
         setUser(result.user);
@@ -73,21 +72,6 @@ export default function LoginForm() {
         showEye
         showErrorOnBlur
       />
-
-      <div className={styles.row}>
-        <label className={styles.checkboxWrap}>
-          <input
-            type="checkbox"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
-          />
-          <span>Запомнить меня</span>
-        </label>
-
-        <Link href="/auth/forgot" className={styles.forgotLink}>
-          Забыли пароль?
-        </Link>
-      </div>
 
       {submitError && <div className={styles.submitError}>{submitError}</div>}
 

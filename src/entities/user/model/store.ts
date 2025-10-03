@@ -6,11 +6,12 @@ import { User, UserState } from "./types";
 
 interface UserStore extends UserState {
   setUser: (user: User | null) => void;
+  updateUser: (updates: Partial<User>) => void;
   clearUser: () => void;
   setLoading: (loading: boolean) => void;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserStore>((set, get) => ({
   user: null,
   isAuthenticated: false,
   isLoading: false,
@@ -20,6 +21,15 @@ export const useUserStore = create<UserStore>((set) => ({
       user,
       isAuthenticated: !!user,
     }),
+
+  updateUser: (updates) => {
+    const currentUser = get().user;
+    if (currentUser) {
+      set({
+        user: { ...currentUser, ...updates },
+      });
+    }
+  },
 
   clearUser: () =>
     set({

@@ -3,7 +3,6 @@ import {
   updateProfile,
   login,
   register,
-  logout,
 } from "@/src/shared/api";
 import { UpdateProfileData, LoginData, RegisterData } from "../model/types";
 
@@ -12,5 +11,4 @@ export const userApi = {
   updateProfile: (data: UpdateProfileData) => updateProfile(data),
   login: (data: LoginData) => login(data),
   register: (data: RegisterData) => register(data),
-  logout: logout,
 };

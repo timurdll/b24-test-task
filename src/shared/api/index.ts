@@ -5,3 +5,4 @@ export * from "./base";
 export * from "./bitrix.client";
 export * from "./auth.api";
 export * from "./deals.api";
+export * from "../types/bitrix.types";

@@ -1,0 +1,40 @@
+.avatarIcon {
+  display: block;
+  object-fit: contain;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, #0147ff 0%, #2b3b63 100%) border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.avatarIcon {
+  opacity: 0.6;
+}
+
+/* Размеры аватара */
+.avatarSmall {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+}
+
+.avatarMedium {
+  width: 100px;
+  height: 100px;
+  font-size: 32px;
+}
+
+.avatarLarge {
+  width: 230px;
+  height: 230px;
+  font-size: 48px;
+}
