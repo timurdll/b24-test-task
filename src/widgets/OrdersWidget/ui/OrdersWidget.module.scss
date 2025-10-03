@@ -200,7 +200,7 @@
 }
 
 .documentPreview {
-  height: 180px;
+  height: 110px;
   background: var(--white);
   border-radius: 4px;
   padding: 0;
@@ -212,14 +212,6 @@
   flex-direction: column;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-}
-
-.documentImage {
-  width: 100%;
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  border-radius: 4px 4px 0 0;
 }
 
 .documentImageFile {

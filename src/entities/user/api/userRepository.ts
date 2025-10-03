@@ -69,7 +69,32 @@ export function getUserByEmail(email: string): any | null {
 }
 
 /**
- * Проверить существование пользователя по email или логину
+ * Проверить существование пользователя по email
+ */
+export function checkUserExistsByEmail(email: string): boolean {
+  let db: Database.Database | null = null;
+
+  try {
+    db = new Database(dbPath);
+
+    const existingUser = db
+      .prepare("SELECT id FROM users WHERE email = ?")
+      .get(email);
+
+    return !!existingUser;
+  } catch (error) {
+    console.error("Error checking user existence by email:", error);
+    return false;
+  } finally {
+    if (db) {
+      db.close();
+    }
+  }
+}
+
+/**
+ * Проверить существование пользователя по email или логину (deprecated)
+ * @deprecated Используйте checkUserExistsByEmail для проверки только email
  */
 export function checkUserExists(email: string, login: string): boolean {
   let db: Database.Database | null = null;

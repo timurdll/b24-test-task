@@ -195,6 +195,17 @@ const OrdersWidget: React.FC = () => {
                   </div>
                 </div>
                 <div className={styles.cardTitle}>{order.title}</div>
+                <button
+                  className={styles.downloadBtn}
+                  onClick={() => console.log(`Скачать: ${order.title}`)}
+                >
+                  <img
+                    src="/icons/download.svg"
+                    alt="Скачать"
+                    className={styles.downloadIcon}
+                  />
+                  Скачать
+                </button>
               </div>
             ))}
           </SwiperSlide>

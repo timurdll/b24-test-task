@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "db:init": "ts-node-esm scripts/init.db.ts"
+    "db:init": "node scripts/init.db.js",
+    "db:drop": "node scripts/drop-db.js",
+    "db:reset": "node scripts/reset-db.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

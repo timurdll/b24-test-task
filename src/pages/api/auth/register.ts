@@ -8,7 +8,7 @@ import {
   ERROR_MESSAGES,
 } from "@/src/entities/user";
 import {
-  checkUserExists,
+  checkUserExistsByEmail,
   createUser,
 } from "@/src/entities/user/api/userRepository";
 import { hashPassword, createToken } from "@/src/entities/user/model/authUtils";
@@ -38,8 +38,8 @@ export default async function handler(
   }
 
   try {
-    // Проверка существующего пользователя
-    if (checkUserExists(email, name)) {
+    // Проверка существующего пользователя только по email
+    if (checkUserExistsByEmail(email)) {
       return res.status(400).json({
         ok: false,
         error: ERROR_MESSAGES.USER_ALREADY_EXISTS,

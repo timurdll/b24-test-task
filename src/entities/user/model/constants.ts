@@ -56,7 +56,7 @@ export const ERROR_MESSAGES = {
   INVALID_TOKEN: "Неверный токен",
   USER_NOT_FOUND: "Пользователь не найден",
   INVALID_CREDENTIALS: "Неверный email или пароль",
-  USER_ALREADY_EXISTS: "Пользователь с таким email или логином уже существует",
+  USER_ALREADY_EXISTS: "Пользователь с таким email уже существует",
   INVALID_EMAIL_FORMAT: "Неверный формат email",
   INVALID_PASSWORD_FORMAT:
     "Пароль должен содержать минимум 6 символов, 1 заглавную букву и 1 цифру",
