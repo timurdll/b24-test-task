@@ -1,0 +1,108 @@
+.form {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.checkboxWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+  cursor: pointer;
+}
+
+.forgotLink {
+  font-size: 13px;
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: opacity 0.12s ease;
+}
+
+.forgotLink:hover {
+  opacity: 0.8;
+}
+
+.submitError {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--red);
+  text-align: center;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  height: 42px;
+  text-transform: none;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.12s ease, transform 0.06s ease;
+}
+
+.submit:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.orBlock {
+  margin-top: 8px;
+  text-align: center;
+  position: relative;
+}
+
+.hrWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.divider {
+  width: 100px;
+  border: none;
+  height: 1px;
+  background: #eee;
+}
+
+.orText {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.link {
+  display: inline-block;
+  margin-top: 6px;
+  background: var(--gr-blue-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 13px;
+  text-decoration: none;
+  transition: opacity 0.12s ease;
+}
+
+.link:hover {
+  opacity: 0.8;
+}

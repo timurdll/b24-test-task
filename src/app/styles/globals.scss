@@ -1,0 +1,295 @@
+/* styles/globals.scss
+   Normalize / Reset + базовые переменные и полезные правила
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+/* =============== Переменные =============== */
+:root {
+  /* Primary / solid */
+  --primary-blue: #0147ff;
+
+  /* Green-blue vertical gradient (top -> bottom) */
+  --gr-blue-top: #0167ca;
+  --gr-blue-bot: #38a8fa;
+  --gr-blue-gradient: linear-gradient(
+    180deg,
+    var(--gr-blue-top) 0%,
+    var(--gr-blue-bot) 100%
+  );
+
+  /* avatar gradient */
+  --avatar-gr-top: #0147ff;
+  --avatar-gr-bot: #2b3b63;
+  --avatar-gradient: linear-gradient(
+    180deg,
+    var(--avatar-gr-top) 0%,
+    var(--avatar-gr-bot) 100%
+  );
+
+  /* neutrals & semantic */
+  --gray: #aeaeae;
+  --neutral-gray: #f1f4f5;
+  --white: #ffffff;
+
+  /* semantic colors */
+  --red: #da2323;
+  --red-bg: rgba(171, 44, 44, 0.18); /* #AB2C2C2E in rgba */
+  --green: #37ab2c;
+  --green-bg: rgba(55, 171, 44, 0.15); /* #37AB2C26 in rgba */
+
+  /* shadows / radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+
+  /* helpers */
+  --focus-ring: 0 0 0 6px rgba(1, 71, 255, 0.08);
+}
+
+/* =============== Базовый reset / нормализация =============== */
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем отступы по-умолчанию */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Корневые размеры и шрифты */
+html {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-size: var(--root-font-size);
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+  /* не задаём явного фонового цвета — контролируется страницей */
+  background: var(--page-bg);
+  color: var(--color-text);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Next.js container */
+#__next {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+/* Теги семантические */
+main,
+nav,
+footer,
+header,
+section,
+article,
+aside {
+  display: block;
+}
+
+/* Списки без маркеров по умолчанию */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Таблицы */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Ссылки — по умолчанию inherit, переопределяй в компоненте */
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Изображения/медиа: не вылезают за контейнер, блоковый контекст */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Формы: наследуем шрифт, сбрасываем margin */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  background: transparent;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+/* Удобные базовые стили для инпутов (можно переопределить в компоненте) */
+input,
+textarea,
+select {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--neutral-gray);
+  padding: 10px 12px;
+  outline: none;
+  background-color: #fff;
+}
+
+/* Псевдо-плейсхолдер */
+::placeholder {
+  color: #9e9e9e;
+  opacity: 1; /* чтобы в разных браузерах一致но */
+}
+
+/* Фокус: не убираем видимость, а делаем аккуратный ring */
+:focus {
+  border: 1px solid var(--primary-blue);
+}
+
+/* Кнопки */
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  transition: transform 0.06s ease, box-shadow 0.06s ease, opacity 0.12s ease;
+}
+
+/* Неактивные элементы */
+[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Скрытые элементы для доступности */
+.sr-only {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Мелкие утилиты */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Плавные переходы на сайте (отключаем для тех кто предпочитает reduced motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =============== Dashboard specific styles =============== */
+:root {
+  --page-bg: #f8f9fa;
+  --color-text: #333;
+  --root-font-size: 16px;
+}
+
+/* Swiper overrides */
+.swiper {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
+}
+
+.swiper-slide {
+  width: 100% !important;
+  flex-shrink: 0 !important;
+  height: 100% !important;
+  padding: 10px 0px !important;
+}
+
+.swiper-pagination {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+}
+
+.swiper-pagination-bullet {
+  background: #e0e0e0 !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary-blue) !important;
+  transform: scale(1.2) !important;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

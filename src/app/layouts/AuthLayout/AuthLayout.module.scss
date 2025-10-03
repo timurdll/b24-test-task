@@ -1,0 +1,106 @@
+.root {
+  height: 100vh;
+  width: 100vw;
+  padding: 40px 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  background: transparent;
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.left {
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+}
+
+.formInner {
+  width: 100%;
+  max-width: 380px;
+}
+
+.logo {
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 8px;
+  font-size: 36px;
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 18px;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.right {
+  display: block;
+  min-height: 420px;
+  background-image: url("/images/car.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.rightMobile {
+  display: none;
+  padding: 16px;
+  background: transparent;
+}
+
+.rightMobileInner {
+  height: 160px;
+  border-radius: 8px;
+  background-image: url("/images/car.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 960px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .left {
+    padding: 20px;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .rightMobile {
+    display: block;
+  }
+}
+
+@media (max-width: 420px) {
+  .formInner {
+    max-width: 100%;
+  }
+
+  .card {
+    margin: 0 4px;
+    box-shadow: none;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+}

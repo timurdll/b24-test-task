@@ -1,0 +1,90 @@
+/* Input.module.scss */
+.inputWrap {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.labelText {
+  display: block;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.inputRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* базовый инпут */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  padding-right: 44px; /* место для иконки справа */
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: var(--white);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* состояние ошибки — красная рамка */
+.inputError {
+  border-color: var(--red);
+}
+
+/* helper text (error message) */
+.helper {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--red);
+}
+
+/* кнопка/иконка справа */
+.iconBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+/* визуально простой фокус для кнопки (kbd) */
+.iconBtn:focus {
+  outline: 1px solid var(--gray);
+  border-radius: 4px;
+}
+
+/* иконка внутри кнопки */
+.icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Если нужно показать статичную иконку ошибки (не кнопка) */
+.errorIcon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
