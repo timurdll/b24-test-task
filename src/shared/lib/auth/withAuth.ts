@@ -4,9 +4,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
 import { parse } from "cookie";
-
-const JWT_SECRET =
-  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+import { JWT_SECRET } from "@/src/entities/user/model/constants";
 
 export interface AuthenticatedRequest extends NextApiRequest {
   user: {

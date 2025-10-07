@@ -14,6 +14,7 @@ import type {
 } from "@/src/shared/types/bitrix.types";
 
 const BITRIX_WEBHOOK =
+  process.env.BITRIX_WEBHOOK_URL ||
   "https://b24-3j0xu3.bitrix24.kz/rest/1/8spymo6egpzv2wzs/";
 
 // Re-export types for convenience

@@ -11,7 +11,7 @@ export const JWT_SECRET =
 /**
  * Путь к базе данных
  */
-export const DB_PATH = "db/users.db";
+export const DB_PATH = process.env.DB_PATH || "db/users.db";
 
 /**
  * Настройки cookie
